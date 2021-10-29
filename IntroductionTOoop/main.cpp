@@ -22,14 +22,12 @@ public:
 	{
 		this->y = y;
 	}
-	//                Methods:
 	double distance(Point other)
 	{
-		/*double x_distance = this->x - other.x;
+		double x_distance = this->x - other.x;
 		double y_distance = this->y - other.y;
 		double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
-		return distance;*/
-		return sqrt(pow(this->x - other.x, 2) + pow(this->y - other.y, 2));
+		return distance;
 	}
 };
 
@@ -41,25 +39,9 @@ double distance(Point A, Point B)
 	return distance;
 }
 
-//#define STRUCT_POINT
-
 void main()
 {
 	setlocale(LC_ALL, "");
-#ifdef STRUCT_POINT
-	int a;  //Объявление переменной "а" типа int
-	Point A;//Объявление переменной "А" типа Point
-			//Объявление экземпляра "А" структуры Point
-			//Объявление объекта "А" структуры Point
-			//Создание объекта "А" структуры Point
-	A.x = 2;
-	A.y = 3;
-	cout << A.x << "\t" << A.y << endl;
-
-	Point* pA = &A;
-	cout << pA->x << "\t" << pA->y << endl;
-#endif // STRUCT_POINT
-
 	Point A;
 	A.set_x(2);
 	A.set_y(3);
