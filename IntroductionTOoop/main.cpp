@@ -48,15 +48,16 @@ public:
 	}
 
 	//               Operators:
-	void operator=(const Point& other)
+	Point& operator=(const Point& other)
 	{
 		this->x = other.x;
 		this->y = other.y;
-		cout << "CopeAssigment:\t\t" << this << endl;
+		cout << "CopyAssignment:\t\t" << this << endl;
+		return *this;
 	}
 
 	//                Methods:
-	double distance(Point other)
+	double distance(const Point& other)
 	{
 		/*double x_distance = this->x - other.x;
 		double y_distance = this->y - other.y;
@@ -72,7 +73,7 @@ public:
 	}
 };
 
-double distance(Point A, Point B)
+double distance(const Point& A, const Point& B)
 {
 	double x_distance = A.get_x() - B.get_x();
 	double y_distance = A.get_y() - B.get_y();
@@ -80,8 +81,11 @@ double distance(Point A, Point B)
 	return distance;
 }
 
+#define delimiter "\n-----------------------------------------\n"
 //#define STRUCT_POINT
 //#define DISTANCE
+//#define CONSTRUCTORS_CHECK
+//#define ASSIGNMENT_CHECK
 
 void main()
 {
@@ -115,12 +119,17 @@ void main()
 	cout << B.get_x() << "\t" << B.get_y() << endl;
 
 	cout << "Размер объекта: " << sizeof(B) << " байт" << endl;
+	cout << delimiter << endl;
 	cout << "Расстояние от точки А до точки В: " << A.distance(B) << endl;
+	cout << delimiter << endl;
 	cout << "Расстояние от точки B до точки A: " << B.distance(A) << endl;
+	cout << delimiter << endl;
 	cout << "Расстояние между точками А и В:   " << distance(A, B) << endl;
+	cout << delimiter << endl;
 	cout << "Расстояние между точками B и A:   " << distance(B, A) << endl;
 #endif // DISTANCE
 
+#ifdef CONSTRUCTORS_CHECK
 	Point A; //Default constructor
 	cout << "Point A: "; A.print();
 
@@ -133,5 +142,27 @@ void main()
 	Point D;
 	D = B; //Cope assigment - оператор присваивания
 	cout << "Point D: "; D.print();
+#endif // CONSTRUCTORS_CHECK
+
+#ifdef ASSIGNMENT_CHECK
+	int a, b, c;
+	a = b = c = 0;
+	cout << a << "\t" << b << "\t" << c << endl;
+
+	Point A, B, C;
+	cout << delimiter << endl;
+	A = B = C = Point(2, 3); //Point(2,3) - явный вызов конструктора. Таким образом создается
+	                         //временный безымянный объект, который существует только в 
+	                         //пределах выражения и удаляется после завершения выражения. 
+	cout << delimiter << endl;
+	A.print();
+	B.print();
+	C.print();
+#endif // ASSIGNMENT_CHECK
+
+	Point A(2, 3);
+	Point B(3, 4);
+	Point C = A + B;
+
 
 }
